@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-This project demonstrates hands-on Windows Server and Active Directory administration skills using Microsoft Azure virtual machines. The lab environment included a Domain Controller (DC1) and a Windows 11 client machine joined to the lab.local domain.
+This project demonstrates hands-on Windows Server and Active Directory administration skills using Microsoft Azure virtual machines. The lab environment included a Domain Controller named DC1 and a Windows 11 client machine named CLIENT01 joined to the lab.local domain.
 
 The project focused on enterprise identity management, Group Policy administration, account security policies, user administration, and domain management tasks commonly performed in help desk and junior system administrator roles.
 
 ---
 
-# Environment
+## Environment
 
 | System | Purpose |
 |---|---|
@@ -20,7 +20,7 @@ The project focused on enterprise identity management, Group Policy administrati
 
 ---
 
-# Skills Demonstrated
+## Skills Demonstrated
 
 - Active Directory Domain Services (AD DS)
 - Domain user account administration
@@ -35,117 +35,113 @@ The project focused on enterprise identity management, Group Policy administrati
 
 ---
 
-# Lab Tasks Completed
+## Lab Tasks Completed
 
-## 1. Initial Server Configuration
-- Configured Windows Server virtual machine
-- Verified server connectivity
-- Prepared Active Directory environment
+### 1. Verified Server Configuration
+
+Verified the Windows Server local server configuration, including the computer name, domain name, AD DS, and DNS role visibility.
 
 ![Server Overview](screenshots/01_Server_LocalServer_Overview.png)
 
 ---
 
-## 2. Active Directory Overview
-- Opened Active Directory Users and Computers
-- Verified domain structure
-- Reviewed organizational hierarchy
+### 2. Verified Active Directory Domain Structure
 
-![ADUC Overview](screenshots/02_ADUC_Domain_Overview.png)
+Opened Active Directory Users and Computers and confirmed the lab.local domain structure was available.
 
----
-
-## 3. Created New Domain User
-- Created domain user account
-- Configured account settings
-- Verified successful user creation
-
-![New User Created](screenshots/03_New_User_Account_Creation.png)
+![ADUC Domain Overview](screenshots/02_ADUC_Domain_Overview.png)
 
 ---
 
-## 4. Created Additional User Accounts
-- Added additional domain users
-- Simulated enterprise user onboarding
+### 3. Created a New Domain User
+
+Created a new Active Directory user account for John Smith as part of a help desk onboarding scenario.
+
+![New User Account Creation](screenshots/03_New_User_Account_Creation.png)
+
+---
+
+### 4. Verified User Account Creation
+
+Confirmed the new user account appeared inside Active Directory Users and Computers.
 
 ![User Account Created](screenshots/04_User_Account_Created.png)
 
 ---
 
-## 5. Created Security Groups
-- Created Active Directory security groups
-- Configured permissions structure
+### 5. Created a Security Group
 
-![Security Group Created](screenshots/05_Security_Group_Creation.png)
+Created a new global security group named HelpDesk to simulate department-based access control.
 
----
-
-## 6. Additional Group Management
-- Continued security group configuration
-- Organized domain access structure
-
-![Additional Group Creation](screenshots/06_Security_Group_Created.png)
+![Security Group Creation](screenshots/05_Security_Group_Creation.png)
 
 ---
 
-## 7. Added Users to Security Groups
-- Assigned domain users to security groups
-- Verified membership configuration
+### 6. Verified Security Group Creation
 
-![User Added To Group](screenshots/07_User_Added_To_Security_Group.png)
+Confirmed the HelpDesk security group was created successfully in Active Directory.
+
+![Security Group Created](screenshots/06_Security_Group_Created.png)
 
 ---
 
-## 8. Opened Group Policy Management
-- Accessed Group Policy Management Editor
-- Navigated account security settings
+### 7. Added User to Security Group
+
+Added John Smith to the HelpDesk security group to simulate assigning access through group membership.
+
+![User Added To Security Group](screenshots/07_User_Added_To_Security_Group.png)
+
+---
+
+### 8. Opened Group Policy Management
+
+Opened Group Policy Management and selected the Default Domain Policy for the lab.local domain.
 
 ![Group Policy Management](screenshots/08_GroupPolicy_Management.png)
 
 ---
 
-## 9. Configured Account Lockout Policies
-- Configured account lockout threshold
-- Configured lockout duration
-- Configured reset timer policies
+### 9. Opened Group Policy Editor
 
-![Group Policy Editor](screenshots/09_GroupPolicy_Editor_Open.png)
+Opened the Group Policy Management Editor to configure domain-level security settings.
 
----
-
-## 10. Applied Account Lockout Security Policy
-- Enabled account lockout protections
-- Verified policy configuration
-
-![Account Lockout Policy](screenshots/10_Account_Lockout_Policies.png)
+![Group Policy Editor Open](screenshots/09_GroupPolicy_Editor_Open.png)
 
 ---
 
-## 11. Tested Account Lockout Functionality
-- Simulated failed authentication attempts
-- Verified security policy enforcement
+### 10. Reviewed Account Lockout Policy Settings
 
-![Account Lockout Test](screenshots/11_Account_Lockout_Threshold.png)
+Navigated to the Account Lockout Policy settings inside Group Policy before applying the new configuration.
 
----
-
-## 12. Forced Group Policy Update
-- Executed gpupdate /force
-- Verified successful policy application
-
-![Group Policy Update](screenshots/12_GroupPolicy_Update_Forced.png)
+![Account Lockout Policy Settings](screenshots/10_Account_Lockout_Policy_Settings.png)
 
 ---
 
-# Commands Used
+### 11. Configured Account Lockout Threshold
 
-## Force Group Policy Update
+Configured the account lockout threshold to lock accounts after three invalid logon attempts.
+
+![Account Lockout Threshold Configured](screenshots/11_Account_Lockout_Threshold_Configured.png)
+
+---
+
+### 12. Forced Group Policy Update
+
+Ran gpupdate /force to apply Group Policy changes immediately.
+
+![Group Policy Update Forced](screenshots/12_GroupPolicy_Update_Forced.png)
+
+---
+
+## Commands Used
+
+### Force Group Policy Update
 
 ```powershell
 gpupdate /force
 ```
 
-## Run Command As Domain User
+### Run Command As Domain User
 
 ```cmd
 runas /user:lab.local\JohnSmith cmd
@@ -153,45 +149,41 @@ runas /user:lab.local\JohnSmith cmd
 
 ---
 
-# Troubleshooting Encountered
+## Troubleshooting Encountered
 
-## RDP Authentication Issues
-During the project, Remote Desktop credential caching and Azure RDP configuration created authentication issues when attempting to switch between local and domain accounts.
+### RDP Authentication Issues
 
-## Azure VM Session Handling
-Azure virtual machines automatically reconnect to previously authenticated sessions, which prevented traditional multi-user Windows login screen behavior from appearing.
+During the lab, Remote Desktop credential caching and Azure RDP behavior caused issues when attempting to switch between the local azureadmin account and domain user accounts.
 
-## Group Policy Propagation
-After configuring account lockout policies, Group Policy updates needed to be manually forced using:
+### Azure VM Session Handling
 
-```powershell
-gpupdate /force
-```
+The Azure-hosted Windows client automatically reconnected to previously authenticated sessions, which prevented the normal multi-user Windows login screen from appearing consistently.
 
-to ensure policy deployment across the environment.
+### RDP Configuration Fix
 
----
+Remote Desktop was re-enabled remotely from Azure using a PowerShell Run Command. This helped restore access to CLIENT01 after connection errors occurred.
 
-# Key Takeaways
+### Group Policy Propagation
 
-This project provided practical experience with:
-- Enterprise Windows administration
-- Active Directory management
-- Security policy deployment
-- Identity and access management
-- Help desk troubleshooting workflows
-- Azure cloud infrastructure administration
-
-The lab simulated real-world junior system administrator and help desk tasks commonly performed in enterprise IT environments.
+After configuring account lockout policies, Group Policy was manually refreshed using gpupdate /force to apply the new domain security settings.
 
 ---
 
-# Future Improvements
+## Key Takeaways
 
-- Implement Organizational Units (OUs)
-- Configure Group Policy Objects (GPOs)
-- Deploy roaming profiles
-- Implement password complexity policies
+This lab provided practical experience with enterprise Windows administration, Active Directory management, security group configuration, Group Policy deployment, domain client verification, and Azure VM troubleshooting.
+
+The lab also showed how real-world help desk work often involves more than one tool. Active Directory, Group Policy, Remote Desktop, Azure, and Windows client settings all had to work together for the environment to function properly.
+
+---
+
+## Future Improvements
+
+- Create Organizational Units (OUs)
+- Add more test users
+- Configure separate GPOs for users and computers
+- Add shared folder permissions
+- Configure mapped network drives
 - Add PowerShell automation
-- Configure shared folders and NTFS permissions
-- Expand environment with additional client systems
+- Document account unlock and password reset workflows
+- Build a full help desk ticket simulation
