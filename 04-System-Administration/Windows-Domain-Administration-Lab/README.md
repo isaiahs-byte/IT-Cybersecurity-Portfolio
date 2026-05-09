@@ -21,7 +21,20 @@ The project focused on enterprise identity management, Group Policy administrati
 
 ---
 
-## Skills Demonstrated
+---
+
+## Tools Used
+
+- Microsoft Azure
+- Windows Server 2025
+- Windows 11
+- Active Directory Users and Computers
+- Group Policy Management
+- Remote Desktop Protocol (RDP)
+- PowerShell
+- Command Prompt
+
+- ## Skills Demonstrated
 
 - Active Directory Domain Services (AD DS)
 - Domain user account administration
