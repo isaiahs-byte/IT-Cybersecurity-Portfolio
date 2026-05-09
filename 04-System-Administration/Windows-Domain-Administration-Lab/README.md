@@ -44,11 +44,4 @@ Screenshots for this lab are stored in the screenshots folder.
 
 ---
 
-## Commands Used
 
-```powershell
-gpupdate /force
-
----
-
-This lab provided hands-on experience with enterprise Windows domain administration and common help desk account management tasks using Active Directory and Group Policy.
