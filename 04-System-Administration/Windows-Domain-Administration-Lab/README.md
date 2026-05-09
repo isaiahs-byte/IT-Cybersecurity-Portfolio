@@ -49,8 +49,6 @@ The project focused on enterprise identity management, Group Policy administrati
 
 ---
 
----
-
 ## Real-World Scenario Simulation
 
 This lab simulated a common enterprise help desk workflow involving user account creation, security group assignment, Group Policy configuration, account security enforcement, domain authentication testing, and Remote Desktop troubleshooting.
