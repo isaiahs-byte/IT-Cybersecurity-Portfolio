@@ -1,6 +1,7 @@
 # Windows Domain Administration Lab
 
-## Project Overview
+![Active Directory Topology](screenshots/ActiveDirectory_Topology.png)## Project Overview
+
 
 This project demonstrates hands-on Windows Server and Active Directory administration skills using Microsoft Azure virtual machines. The lab environment included a Domain Controller named DC1 and a Windows 11 client machine named CLIENT01 joined to the lab.local domain.
 
